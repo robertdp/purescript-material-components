@@ -10,12 +10,3 @@ exports._defaultDestroyComponent = function(unit) {
     };
   };
 };
-
-exports._createRipple = function(unit) {
-  return function(element) {
-    return function() {
-      MDCRipple.attachTo(element);
-      return unit;
-    };
-  };
-};

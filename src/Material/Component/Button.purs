@@ -1,20 +1,25 @@
 module Material.Component.Button where
 
+import Prelude
+import Control.Monad.Eff (Eff)
+
 import Material.Types
 import Material.Utils
+import Material.Component.Ripple
 
 
 foreign import data Button :: Type
 
-foreign import createButton :: forall a. Element a => a -> Eff (material :: MATERIAL) (Material Button)
+foreign import createButton :: forall e eff. Element e => e -> Eff (material :: MATERIAL | eff) (Material Button)
 
-instance Component Button where
+instance componentButton :: Component Button where
   createComponent = createButton
   destroyComponent = defaultDestroyComponent
 
 
-instance Ripple Button where
+instance rippleButton :: Ripple Button where
   createComponentWithRipple element = do
     button <- createComponent element
-    attachRipple element
+    void $ createRipple element
     pure button
+

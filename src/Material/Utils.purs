@@ -1,14 +1,12 @@
 module Material.Utils where
 
+import Prelude
 import Material.Types
+import Control.Monad.Eff (Eff)
 
 
-foreign import _defaultDestroyComponent :: forall a. Unit -> Material a -> Eff (material :: MATERIAL) Unit
+foreign import _defaultDestroyComponent :: forall a eff. Unit -> Material a -> Eff (material :: MATERIAL | eff) Unit
 
-defaultDestroyComponent :: forall a. Material a -> Eff (material :: MATERIAL) Unit
+defaultDestroyComponent :: forall a eff. Material a -> Eff (material :: MATERIAL | eff) Unit
 defaultDestroyComponent = _defaultDestroyComponent unit
 
-foreign import _createRipple :: forall e. Element e => Unit -> e -> Eff (material :: MATERIAL) Unit
-
-createRipple :: forall e. Element e => e -> Eff (material :: MATERIAL) Unit
-createRipple = _createRipple unit

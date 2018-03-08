@@ -1,9 +1,12 @@
 module Material.Types where
 
+import Prelude
+import Control.Monad.Eff (kind Effect, Eff)
 
-foreign import kind MATERIAL :: Effect
 
-newtype Material a = Material a
+foreign import data MATERIAL :: Effect
+
+foreign import data Material :: Type -> Type
 
 class Element e
 
@@ -11,7 +14,6 @@ class Component a where
   createComponent :: forall e eff. Element e => e -> Eff (material :: MATERIAL | eff) (Material a)
   destroyComponent :: forall eff. Material a -> Eff (material :: MATERIAL | eff) Unit
 
-class Ripple a <= Component a where
-  createComponentWithRipple :: forall e eff. Element e => e -> Eff (material :: MATERIAL | eff) (Material a)
 
-instance monadComponent :: Monad Component
+class Component a <= Ripple a where
+  createComponentWithRipple :: forall e eff. Element e => e -> Eff (material :: MATERIAL | eff) (Material a)
