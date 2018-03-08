@@ -17,7 +17,7 @@ instance componentButton :: Component Button where
   destroyComponent = defaultDestroyComponent
 
 
-instance rippleButton :: Ripple Button where
+instance rippleComponentButton :: RippleComponent Button where
   createComponentWithRipple element = do
     button <- createComponent element
     void $ createRipple element

@@ -14,6 +14,3 @@ class Component a where
   createComponent :: forall e eff. Element e => e -> Eff (material :: MATERIAL | eff) (Material a)
   destroyComponent :: forall eff. Material a -> Eff (material :: MATERIAL | eff) Unit
 
-
-class Component a <= Ripple a where
-  createComponentWithRipple :: forall e eff. Element e => e -> Eff (material :: MATERIAL | eff) (Material a)

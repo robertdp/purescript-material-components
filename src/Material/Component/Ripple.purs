@@ -15,3 +15,7 @@ foreign import createRipple :: forall e eff. Element e => e -> Eff (material :: 
 instance componentRipple :: Component Ripple where
   createComponent = createRipple
   destroyComponent = defaultDestroyComponent
+
+
+class Component a <= RippleComponent a where
+  createComponentWithRipple :: forall e eff. Element e => e -> Eff (material :: MATERIAL | eff) (Material a)
